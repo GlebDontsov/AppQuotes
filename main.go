@@ -71,10 +71,11 @@ func CreateNewQuote() fyne.CanvasObject {
 
 func CreateMyQuote() fyne.CanvasObject {
 	box := container.NewVBox()
+	mapQuotesWidget := map[string]fyne.CanvasObject{}
+
 	icStar, _ := fyne.LoadResourceFromPath("icon/star.png")
 	icShare, _ := fyne.LoadResourceFromPath("icon/share.png")
 	icDelete, _ := fyne.LoadResourceFromPath("icon/delete.png")
-	//icStarBlack, _ := fyne.LoadResourceFromPath("icon/star_yel.png")
 
 	for i, v := range mapQuotes {
 		key := i
@@ -90,6 +91,7 @@ func CreateMyQuote() fyne.CanvasObject {
 			SaveQuotes("star_quotes.json", mapStar)
 			delete(mapQuotes, key)
 			SaveQuotes("quotes.json", mapQuotes)
+			box.Objects = Remove(box.Objects, mapQuotesWidget[key])
 		})
 
 		buttonShare := widget.NewButton("", func() {})
@@ -101,6 +103,7 @@ func CreateMyQuote() fyne.CanvasObject {
 				delete(mapStar, key)
 				SaveQuotes("star_quotes.json", mapStar)
 			}
+			box.Objects = Remove(box.Objects, mapQuotesWidget[key])
 		})
 
 		buttonStar.SetIcon(icStar)
@@ -116,6 +119,7 @@ func CreateMyQuote() fyne.CanvasObject {
 		)
 
 		box.Add(card)
+		mapQuotesWidget[key] = box.Objects[len(box.Objects)-1]
 	}
 	return container.NewVScroll(box)
 }
@@ -124,7 +128,8 @@ func CreateFavourites() fyne.CanvasObject {
 	box := container.NewVBox()
 	icStar, _ := fyne.LoadResourceFromPath("icon/star_yel.png")
 	icShare, _ := fyne.LoadResourceFromPath("icon/share.png")
-	//icStarBlack, _ := fyne.LoadResourceFromPath("icon/star_yel.png")
+
+	mapStarWidget := map[string]fyne.CanvasObject{}
 
 	for i, v := range mapStar {
 		key := i
@@ -140,7 +145,9 @@ func CreateFavourites() fyne.CanvasObject {
 			delete(mapStar, key)
 			SaveQuotes("quotes.json", mapQuotes)
 			SaveQuotes("star_quotes.json", mapStar)
+			box.Objects = Remove(box.Objects, mapStarWidget[key])
 		})
+
 		buttonShare := widget.NewButton("", func() {})
 
 		buttonStar.SetIcon(icStar)
@@ -153,10 +160,19 @@ func CreateFavourites() fyne.CanvasObject {
 			"",
 			text,
 		)
-
 		box.Add(card)
+		mapStarWidget[key] = box.Objects[len(box.Objects)-1]
 	}
 	return container.NewVScroll(box)
+}
+
+func Remove(list []fyne.CanvasObject, item fyne.CanvasObject) []fyne.CanvasObject {
+	for i, value := range list {
+		if value == item {
+			return append(list[:i], list[i+1:]...)
+		}
+	}
+	return list
 }
 
 func main() {
