@@ -42,33 +42,6 @@ func SaveQuotes(path string, mapQ map[string]map[string]string) {
 var mapQuotes = GetQuotes("quotes.json")
 var mapStar = GetQuotes("star_quotes.json")
 
-//func CreateNewQuote() fyne.CanvasObject {
-//	QuoteField := widget.NewMultiLineEntry()
-//	QuoteField.SetPlaceHolder("Quote...")
-//	QuoteField.Wrapping = fyne.TextWrapBreak
-//	QuoteField.SetMinRowsVisible(10)
-//
-//	AuthorField := widget.NewEntry()
-//	AuthorField.SetPlaceHolder("Author...")
-//
-//	btnSave := container.New(
-//		layout.NewMaxLayout(),
-//		canvas.NewRectangle(color.White),
-//		widget.NewButton("Save", func() {
-//			if QuoteField.Text != "" && AuthorField.Text != "" {
-//				id := uuid.New().String()
-//				mapQuotes[id] = map[string]string{"author": AuthorField.Text, "text": QuoteField.Text}
-//				QuoteField.Text = ""
-//				AuthorField.Text = ""
-//				SaveQuotes("quotes.json", mapQuotes)
-//			}
-//		}),
-//	)
-//
-//	box := container.NewVBox(QuoteField, AuthorField, btnSave)
-//	return box
-//}
-
 func Remove(list []fyne.CanvasObject, item fyne.CanvasObject) []fyne.CanvasObject {
 	for i, value := range list {
 		if value == item {
