@@ -5,7 +5,7 @@
 
 - набор высказываний
 
-![image](https://user-images.githubusercontent.com/103101200/217253930-72155fa0-c236-4be4-8d80-ab80f0e039ed.png)
+![image](https://user-images.githubusercontent.com/103101200/217255251-11e2abcb-3efe-4419-a9fb-fdc2a0d5be36.png)
 
 - избранные цитаты
 
