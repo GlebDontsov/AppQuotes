@@ -114,7 +114,7 @@ func CreateCardM(key string, value map[string]string, mapWidget map[string]fyne.
 			delete(mapStar, key)
 			SaveQuotes("star_quotes.json", mapStar)
 		}
-		*box1 = Remove(*box1, mapWidget[key])
+		*box = Remove(*box, mapWidget[key])
 		delete(mapWidget, key)
 	})
 
